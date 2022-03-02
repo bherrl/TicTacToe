@@ -7,7 +7,17 @@ document.getElementById("container").onclick = event => fieldClicked(event.targe
 // Diese Funktion wird bei einem Klick auf dem Container aufgerufen,
 // als Parameter wird die FieldId des geklickten Fields als String übergeben.
 function fieldClicked(fieldId) {
-    alert("not yet implemented!");
+
+    if (player === "X"){
+        document.getElementById(fieldId).innerText = "X";
+        changePlayer()
+    }
+
+    if (player === "O"){
+        document.getElementById(fieldId).innerText = "O";
+        changePlayer()
+    }
+
 
     // TODO: 
     // Implementiere den fehlenden Code in diese Funktion.
