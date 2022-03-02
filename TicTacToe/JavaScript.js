@@ -8,20 +8,28 @@ document.getElementById("container").onclick = event => fieldClicked(event.targe
 // als Parameter wird die FieldId des geklickten Fields als String übergeben.
 function fieldClicked(fieldId) {
 
-    if (player === "X"){
-        document.getElementById(fieldId).innerText = "X";
-        changePlayer()
-    }
+        if (checkForWinner("X") || checkForWinner("O")){
+            document.getElementById("messageBox").innerHTML = "Player " + player + " WON"
+        }
 
-    if (player === "O"){
-        document.getElementById(fieldId).innerText = "O";
-        changePlayer()
-    }
+        if (checkForGameOver()){
+            document.getElementById("messageBox").innerHTML = "Player " + player + " GAME OVER"
+        }
+
+        if (player === "X" && !isFieldSet(fieldId)) {
+            document.getElementById(fieldId).innerText = "X";
+            changePlayer()
+
+        } else if (player === "O" && !isFieldSet(fieldId)) {
+            document.getElementById(fieldId).innerText = "O";
+            changePlayer()
+        }
 
 
-    // TODO: 
+
+    // TODO:
     // Implementiere den fehlenden Code in diese Funktion.
-    // Verwende hierzu die teils schon implementierten 
+    // Verwende hierzu die teils schon implementierten
     // Funktionen checkForWinner(), getFieldContent(), isFieldSet() und checkForGameOver()
     // weiter unten sowie den Debugger!
 }
@@ -48,8 +56,8 @@ function checkForWinner(player) {
 }
 
 function checkForWinningRow(fieldId1, fieldId2, fieldId3, player) {
-    return getFieldContent(fieldId1) === getFieldContent(fieldId2) && 
-        getFieldContent(fieldId2) === getFieldContent(fieldId3) && 
+    return getFieldContent(fieldId1) === getFieldContent(fieldId2) &&
+        getFieldContent(fieldId2) === getFieldContent(fieldId3) &&
         getFieldContent(fieldId1) === player;
 }
 
@@ -58,9 +66,14 @@ function getFieldContent(fieldId) {
 }
 
 function isFieldSet(fieldId) {
-    alert("not yet implemented!");
-    return false; //TODO: überprüfe, ob das entsprechende field nicht leer ist
+    if (document.getElementById(fieldId).innerText === "X" || document.getElementById(fieldId).innerText === "O") {
+        return true;
+    } else {
+        return false;
+    }
 }
+
+
 
 function checkForGameOver() {
     return isFieldSet("11") && isFieldSet("12") && isFieldSet("13") &&
